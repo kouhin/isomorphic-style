@@ -1,0 +1,48 @@
+{
+  "name": "isomorphic-style",
+  "version": "0.0.2",
+  "description": "Isomorphic CSS Style component for React & Webpack",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir .",
+    "clean": "rimraf *.js",
+    "lint": "eslint src",
+    "test": "npm run lint",
+    "postinstall": "npm run build",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kouhin/isomorphic-style.git"
+  },
+  "authors": [
+    "Bin Hou <houbin217jz@gmail.com> (http://github.com/kouhin)"
+  ],
+  "keywords": [
+    "css",
+    "isomorphic",
+    "loader",
+    "react",
+    "style",
+    "webpack"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "babel-runtime": "^6.20.0",
+    "loader-utils": "^0.2.16"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "rimraf": "^2.5.4"
+  }
+}
