@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-style",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Isomorphic CSS Style component for React & Webpack",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
     "clean": "rimraf *.js",
     "lint": "eslint src",
     "test": "npm run lint",
-    "postinstall": "npm run build",
     "prepublish": "npm run clean && npm run build"
   },
   "repository": {
