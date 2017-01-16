@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/kouhin/isomorphic-style/tree/develop.svg?style=svg)](https://circleci.com/gh/kouhin/isomorphic-style/tree/develop)
 [![dependency status](https://david-dm.org/kouhin/isomorphic-style.svg?style=flat-square)](https://david-dm.org/kouhin/isomorphic-style)
 
-## Installationg
+## Installation
 
 ```
 npm install --save isomorphic-style
@@ -105,6 +105,6 @@ res.send(`
 ```
 ### License
 
-The MIT License © 2015-2016 Kriasoft, LLC. All rights reserved.
+The MIT License © 2017-2018 Bin Hou. All rights reserved.
 
 Original isomorphic-style-loader code is Copyright © 2015-2016 Kriasoft, LLC. covered under MIT license. 
