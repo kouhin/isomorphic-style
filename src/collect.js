@@ -5,7 +5,7 @@ class Styles {
   }
 
   add(id, styleObj) {
-    if (this.ids.indexOf(id) !== -1) {
+    if (this.ids.indexOf(id) === -1) {
       this.ids.push(id);
       this.styles.push(styleObj);
     }
