@@ -57,7 +57,7 @@ class StyleObj {
   }
 }
 
-export default function insertCss(styles = '', options = {}, force = false) {
+export default function insertCss(moduleId, styles = '', options = {}, force = false) {
   const { insertAt, prefix } = Object.assign({
     insertAt: 'bottom',
     prefix: 'isomorphic_style_',
@@ -65,7 +65,10 @@ export default function insertCss(styles = '', options = {}, force = false) {
 
   for (let i = 0, len = styles.length; i < len; i += 1) {
     const style = styles[i];
-    const [moduleId, css, media, sourceMap] = style;
+    // style[0] is module.id or module name
+    const css = style[1];
+    const media = style.length > 2 ? style[2] : null;
+    const sourceMap = style.length > 3 ? style[3] : null;
     const id = `${moduleId}-${i}`;
 
     let cssText = css;
