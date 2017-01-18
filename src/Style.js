@@ -9,14 +9,14 @@ class Style extends React.Component {
   }
 
   componentWillMount() {
-    for (let i = 0, len = this.styles.length; i < len; i++) {
+    for (let i = 0, len = this.styles.length; i < len; i += 1) {
       this.styles[i].insertCss();
     }
   }
 
   componentWillUnmount() {
     setTimeout(() => {
-      for (let i = 0, len = this.styles.length; i < len; i++) {
+      for (let i = 0, len = this.styles.length; i < len; i += 1) {
         this.styles[i].removeCss();
       }
     }, 0);

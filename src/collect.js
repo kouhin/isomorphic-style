@@ -34,7 +34,7 @@ export function collectStyles(fn) {
   const result = fn();
   const styles = [];
   const stylesResult = stylesInstance.styles;
-  for (let i = 0, len = stylesResult.length; i < len; i++) {
+  for (let i = 0, len = stylesResult.length; i < len; i += 1) {
     styles.push(stylesResult[i].toStyleText());
   }
   stylesInstance = null;
