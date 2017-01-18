@@ -7,9 +7,7 @@ export function mountStyle(style = []) {
 
 export function unmountStyle(style = []) {
   const styles = Array.isArray(style) ? style : [style];
-  setTimeout(() => {
-    for (let i = 0, len = styles.length; i < len; i += 1) {
-      styles[i].removeCss();
-    }
-  }, 0);
+  for (let i = 0, len = styles.length; i < len; i += 1) {
+    styles[i].removeCss();
+  }
 }
