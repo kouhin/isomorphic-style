@@ -1,6 +1,6 @@
 {
   "name": "isomorphic-style",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Isomorphic CSS Style component for React & Webpack",
   "main": "index.js",
   "scripts": {
