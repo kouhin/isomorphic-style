@@ -65,10 +65,11 @@ import style from './MyComponent.css';
 
 export default class MyComponent extends React.Component {
   return (
-    <div className={style.Block}>
-      <Style style={style} />
-      <h1 className={style.Title}>MyComponent!</h1>
-    </div>
+    <Style style={style}>
+      <div className={style.Block}>
+        <h1 className={style.Title}>MyComponent!</h1>
+      </div>
+    </Style>
   );
 }
 ```
@@ -102,30 +103,6 @@ res.send(`
 </html>
 `);
 ...
-```
-
-### Sometimes, `<Style/>` cannot be used in render. We also provide `mountStyle()` and `unmountStyle()`.
-
-```javascript
-// MyComponent.js
-import React from 'react';
-import { mountStyle, unmountStyle } from 'isomorphic-style';
-import style from './MyComponent.css';
-
-export default class MyComponent extends React.Component {
-
-  componentWillMount() {
-    mountStyle(style);
-  }
-
-  componentWillUnmount() {
-    unmountStyle(style);
-  }
-
-  return (
-    <img className={style.Block} src='https://avatars3.githubusercontent.com/u/5006663' />
-  );
-}
 ```
 
 ### License

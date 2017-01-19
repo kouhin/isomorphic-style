@@ -13,11 +13,12 @@ class Style extends React.Component {
   }
 
   render() {
-    return null;
+    return this.props.children;
   }
 }
 
 Style.propTypes = {
+  children: React.PropTypes.node,
   style: React.PropTypes.oneOfType([
     React.PropTypes.arrayOf(
       React.PropTypes.shape({
