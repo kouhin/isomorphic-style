@@ -103,6 +103,31 @@ res.send(`
 `);
 ...
 ```
+
+### Sometimes, `<Style/>` cannot be used in render. We also provide `mountStyle()` and `unmountStyle()`.
+
+```javascript
+// MyComponent.js
+import React from 'react';
+import { mountStyle, unmountStyle } from 'isomorphic-style';
+import style from './MyComponent.css';
+
+export default class MyComponent extends React.Component {
+
+  componentWillMount() {
+    mountStyle(style);
+  }
+
+  componentWillUnmount() {
+    unmountStyle(style);
+  }
+
+  return (
+    <img className={style.Block} src='https://avatars3.githubusercontent.com/u/5006663' />
+  );
+}
+```
+
 ### License
 
 The MIT License © 2017-2018 Bin Hou. All rights reserved.
