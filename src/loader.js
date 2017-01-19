@@ -2,16 +2,18 @@ import loaderUtils from 'loader-utils';
 import path from 'path';
 import crypto from 'crypto';
 
+function getStyleId(context, filepath) {
+  const hash = crypto.createHash('md5');
+  hash.update(filepath);
+  const moduleId = hash.digest('base64').replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+  return moduleId;
+}
+
 module.exports = function loader() {};
 module.exports.pitch = function pitch(remainingRequest) {
   if (this.cacheable) {
     this.cacheable();
   }
-
-  const filepath = path.relative(this.options.context, this.resource);
-  const hash = crypto.createHash('md5');
-  hash.update(filepath);
-  const moduleId = hash.digest('hex');
 
   const query = loaderUtils.parseQuery(this.query || '');
   const loaderOptions = this.options || {};
@@ -20,6 +22,10 @@ module.exports.pitch = function pitch(remainingRequest) {
     prefix: loaderOptions.prefix || query.prefix,
   };
   const optionString = JSON.stringify(options);
+
+  const filepath = path.relative(this.options.context, this.resource);
+  const getStyleIdFunc = options.getStyleId || getStyleId;
+  const moduleId = getStyleIdFunc(this.options.context, filepath);
 
   return `
     function formatContent(c) {
