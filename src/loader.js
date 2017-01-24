@@ -28,6 +28,7 @@ module.exports.pitch = function pitch(remainingRequest) {
   const moduleId = getStyleIdFunc(this.options.context, filepath);
 
   return `
+    var canUseDOM = require(${loaderUtils.stringifyRequest(this, require.resolve('./canUseDOM'))}).default;
     function formatContent(c) {
       return (typeof c === 'string') ? [[module.id, content, '']] : c;
     }
@@ -35,12 +36,30 @@ module.exports.pitch = function pitch(remainingRequest) {
     var content = formatContent(require(${loaderUtils.stringifyRequest(this, `!!${remainingRequest}`)}));
     var insertCss = require('isomorphic-style/insertCss').default;
     var ref = 0;
-    var str = null;
     var removeCss = null;
     module.exports = content.locals || {};
-    module.exports.getContent = function() { if (!str) { str = content.toString(); }; return str; };
-    module.exports.insertCss = function() { ref++; if(ref === 1) { removeCss = insertCss(moduleId, content, ${optionString}); }};
-    module.exports.removeCss = function() { ref--; if(ref < 0) { ref = 0 }; if(ref < 1) { removeCss(); removeCss = null; }};
+    module.exports.getContent = function() { return content.toString(); };
+    module.exports.insertCss = function() {
+      if (canUseDOM) {
+        ref += 1;
+        if(ref === 1) {
+          removeCss = insertCss(moduleId, content, ${optionString});
+        }
+      } else {
+        removeCss = insertCss(moduleId, content, ${optionString});
+      }
+      return removeCss;
+    };
+    module.exports.removeCss = function() {
+      if (canUseDOM) {
+        ref--;
+        if(ref < 0) { ref = 0 };
+        if(ref < 1) {
+          removeCss();
+          removeCss = null;
+        }
+      }
+    };
 
     // Hot Module Replacement
     // https://webpack.github.io/docs/hot-module-replacement
@@ -48,12 +67,22 @@ module.exports.pitch = function pitch(remainingRequest) {
     if (module.hot && typeof window !== 'undefined' && window.document) {
       module.hot.accept(${loaderUtils.stringifyRequest(this, `!!${remainingRequest}`)}, function() {
         content = formatContent(require(${loaderUtils.stringifyRequest(this, `!!${remainingRequest}`)}));
-        module.exports.insertCss = function() { ref++; if(ref === 1) { removeCss = insertCss(moduleId, content, ${optionString}); }};
+            module.exports.insertCss = function() {
+              if (canUseDOM) {
+                ref += 1;
+                if(ref === 1) {
+                  removeCss = insertCss(moduleId, content, ${optionString});
+                }
+              } else {
+                removeCss = insertCss(moduleId, content, ${optionString});
+              }
+              return removeCss;
+            };
         if (removeCss !== null) {
           removeCss = insertCss(moduleId, content, ${optionString}, true);
         }
       });
-      module.hot.dispose(function() { removeCss(); removeCss = noop; });
+      module.hot.dispose(function() { removeCss(); removeCss = null; });
     }
   `;
 };

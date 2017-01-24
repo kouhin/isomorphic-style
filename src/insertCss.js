@@ -55,7 +55,7 @@ class StyleObj {
   }
 }
 
-export default function insertCss(moduleId, styles = '', options = {}, force = false) {
+export default function insertCss(moduleId, styles = [], options = {}, force = false) {
   const { insertAt, prefix } = Object.assign({
     insertAt: 'bottom',
     prefix: 'isomorphic_style_',
