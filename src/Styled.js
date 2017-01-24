@@ -2,11 +2,10 @@
 import React from 'react';
 import { mountStyle, unmountStyle } from './helpers';
 
-export default class Style extends React.Component {
+export default class Styled extends React.Component {
 
   static propTypes = {
-    children: React.PropTypes.node,
-    style: React.PropTypes.oneOfType([
+    by: React.PropTypes.oneOfType([
       React.PropTypes.arrayOf(
         React.PropTypes.shape({
           insertCss: React.PropTypes.func.isRequired,
@@ -18,6 +17,7 @@ export default class Style extends React.Component {
         removeCss: React.PropTypes.func.isRequired,
       }),
     ]),
+    children: React.PropTypes.node,
   };
 
   static get defaultProps() {
@@ -27,11 +27,11 @@ export default class Style extends React.Component {
   }
 
   componentWillMount() {
-    mountStyle(this.props.style);
+    mountStyle(this.props.by);
   }
 
   componentWillUnmount() {
-    unmountStyle(this.props.style);
+    unmountStyle(this.props.by);
   }
 
   render() {

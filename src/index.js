@@ -1,9 +1,9 @@
-import Style from './Style';
+import Styled from './Styled';
 import { collectStyles } from './collect';
 import { mountStyle, unmountStyle } from './helpers';
 
 export {
-  Style,
+  Styled,
   collectStyles,
   mountStyle,
   unmountStyle,

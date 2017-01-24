@@ -60,16 +60,16 @@ $ npm install isomorphic-style --save-dev
 ```javascript
 // MyComponent.js
 import React from 'react';
-import { Style } from 'isomorphic-style';
+import { Styled } from 'isomorphic-style';
 import style from './MyComponent.css';
 
 export default class MyComponent extends React.Component {
   return (
-    <Style style={style}>
+    <Styled by={style}>
       <div className={style.Block}>
         <h1 className={style.Title}>MyComponent!</h1>
       </div>
-    </Style>
+    </Styled>
   );
 }
 ```
