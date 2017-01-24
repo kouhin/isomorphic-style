@@ -34,12 +34,13 @@ module.exports.pitch = function pitch(remainingRequest) {
     var moduleId = '${moduleId}';
     var content = formatContent(require(${loaderUtils.stringifyRequest(this, `!!${remainingRequest}`)}));
     var insertCss = require('isomorphic-style/insertCss').default;
-    var noop = function() {};
-    var removeCss = noop;
+    var ref = 0;
+    var str = null;
+    var removeCss = null;
     module.exports = content.locals || {};
-    module.exports.getContent = function() { return content.toString(); };
-    module.exports.insertCss = function() { removeCss = insertCss(moduleId, content, ${optionString}); };
-    module.exports.removeCss = function() { removeCss(); removeCss = noop; };
+    module.exports.getContent = function() { if (!str) { str = content.toString(); }; return str; };
+    module.exports.insertCss = function() { ref++; if(ref === 1) { removeCss = insertCss(moduleId, content, ${optionString}); }};
+    module.exports.removeCss = function() { ref--; if(ref < 0) { ref = 0 }; if(ref < 1) { removeCss(); removeCss = null; }};
 
     // Hot Module Replacement
     // https://webpack.github.io/docs/hot-module-replacement
@@ -47,8 +48,8 @@ module.exports.pitch = function pitch(remainingRequest) {
     if (module.hot && typeof window !== 'undefined' && window.document) {
       module.hot.accept(${loaderUtils.stringifyRequest(this, `!!${remainingRequest}`)}, function() {
         content = formatContent(require(${loaderUtils.stringifyRequest(this, `!!${remainingRequest}`)}));
-        module.exports.insertCss = function() { removeCss = insertCss(moduleId, content, ${optionString}); };
-        if (removeCss !== noop) {
+        module.exports.insertCss = function() { ref++; if(ref === 1) { removeCss = insertCss(moduleId, content, ${optionString}); }};
+        if (removeCss !== null) {
           removeCss = insertCss(moduleId, content, ${optionString}, true);
         }
       });

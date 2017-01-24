@@ -15,7 +15,6 @@ class StyleObj {
   constructor(id, cssText, media) {
     this.id = id;
     this.cssText = cssText;
-    this.type = 'text/css';
     this.media = media;
     this.created = false;
     this.element = null;
@@ -38,7 +37,6 @@ class StyleObj {
       return false;
     }
     this.element = document.createElement('style');
-    this.element.setAttribute('type', this.type);
     this.element.id = this.id;
     if (this.media) {
       this.element.setAttribute('media', this.media);
@@ -52,7 +50,7 @@ class StyleObj {
   }
 
   toStyleText() {
-    const media = this.media ? `type=" ${this.media}"` : '';
+    const media = this.media ? `media=" ${this.media}"` : '';
     return `<style id="${this.id}" ${media}>${this.cssText}</style>`;
   }
 }
