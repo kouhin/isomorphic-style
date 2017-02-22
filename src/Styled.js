@@ -16,7 +16,7 @@ export default class Styled extends React.Component {
         insertCss: React.PropTypes.func.isRequired,
         removeCss: React.PropTypes.func.isRequired,
       }),
-    ]),
+    ]).isRequired,
     children: React.PropTypes.node,
   };
 
