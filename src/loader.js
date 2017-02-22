@@ -15,12 +15,14 @@ module.exports.pitch = function pitch(remainingRequest) {
     this.cacheable();
   }
 
-  const query = loaderUtils.parseQuery(this.query || '');
-  const loaderOptions = this.options || {};
-  const options = {
-    insertAt: loaderOptions.insertAt || query.insertAt,
-    prefix: loaderOptions.prefix || query.prefix,
-  };
+  const loaderOptions = loaderUtils.getOptions(this);
+  const options = {};
+  if (loaderOptions.insertAt) {
+    options.insertAt = loaderOptions.insertAt;
+  }
+  if (loaderOptions.prefix) {
+    options.prefix = loaderOptions.prefix;
+  }
   const optionString = JSON.stringify(options);
 
   const filepath = path.relative(this.options.context, this.resource);
