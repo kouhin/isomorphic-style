@@ -1,5 +1,7 @@
 # Isomorphic Style component for React & Webpack
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kouhin/isomorphic-style.svg)](https://greenkeeper.io/)
+
 [![CircleCI](https://circleci.com/gh/kouhin/isomorphic-style/tree/develop.svg?style=svg)](https://circleci.com/gh/kouhin/isomorphic-style/tree/develop)
 [![dependency status](https://david-dm.org/kouhin/isomorphic-style.svg?style=flat-square)](https://david-dm.org/kouhin/isomorphic-style)
 
