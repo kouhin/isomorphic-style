@@ -1,23 +1,24 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mountStyle, unmountStyle } from './helpers';
 
 export default class Styled extends React.Component {
 
   static propTypes = {
-    by: React.PropTypes.oneOfType([
-      React.PropTypes.arrayOf(
-        React.PropTypes.shape({
-          insertCss: React.PropTypes.func.isRequired,
-          removeCss: React.PropTypes.func.isRequired,
+    by: PropTypes.oneOfType([
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          insertCss: PropTypes.func.isRequired,
+          removeCss: PropTypes.func.isRequired,
         }),
       ),
-      React.PropTypes.shape({
-        insertCss: React.PropTypes.func.isRequired,
-        removeCss: React.PropTypes.func.isRequired,
+      PropTypes.shape({
+        insertCss: PropTypes.func.isRequired,
+        removeCss: PropTypes.func.isRequired,
       }),
     ]),
-    children: React.PropTypes.node,
+    children: PropTypes.node,
   };
 
   static get defaultProps() {
